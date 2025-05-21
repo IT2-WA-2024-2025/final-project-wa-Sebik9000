@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Odpovědět na otázku</title>
+</head>
+<body>
+    <h1>Odpovědět na otázku</h1>
+    {% if otazka %}
+        <p><strong>Otázka:</strong> {{ otazka }}</p>
+        <form method="POST">
+            <label for="odpoved">Vaše odpověď:</label>
+            <input type="text" id="odpoved" name="odpoved" required>
+            <button type="submit">Odeslat odpověď</button>
+        </form>
+        {% if odpoved %}
+            <p><strong>Vaše odpověď:</strong> {{ odpoved }}</p>
+        {% endif %}
+        <h3>Všechny odpovědi:</h3>
+        <ul>
+            {% for o in vsechny_odpovedi %}
+                <li>{{ o }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Otázka nebyla nalezena.</p>
+    {% endif %}
+    <p><a href="{{ url_for('home') }}">Zpět na úvod</a></p>
+</body>
+</html>
