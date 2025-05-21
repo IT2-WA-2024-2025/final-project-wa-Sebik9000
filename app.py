@@ -9,7 +9,7 @@ odpovedi = []
 
 @app.route('/')
 def home():
-    return render_template('index.html', otazky=otazky)
+    return render_template('index.html', otazky=otazky, odpovedi=odpovedi)
 
 @app.route('/otazka', methods=['GET', 'POST'])
 def otazka():
@@ -32,5 +32,11 @@ def odpoved(id):
     else:
         return render_template('odpoved.html', otazka=None, odpoved=None, vsechny_odpovedi=[])
         
+@app.route('/statistika')
+def statistika():
+    pocet_otazek = len(otazky)
+    pocet_odpovedi = sum(len(o) for o in odpovedi)
+    return render_template('statistika.html', pocet_otazek=pocet_otazek, pocet_odpovedi=pocet_odpovedi)
+
 if __name__ == '__main__':
     app.run(debug=True)

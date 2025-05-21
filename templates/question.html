@@ -3,10 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Zadat anketní otázku</title>
+    <script>
+        function validateForm() {
+            var q = document.getElementById('question').value.trim();
+            if (q === "") {
+                alert("Zadejte prosím otázku.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <h1>Zadejte anketní otázku</h1>
-    <form method="POST">
+    <form method="POST" onsubmit="return validateForm();">
         <label for="question">Vaše otázka:</label>
         <input type="text" id="question" name="question" required>
         <button type="submit">Odeslat</button>

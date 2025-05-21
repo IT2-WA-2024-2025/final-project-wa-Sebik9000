@@ -42,6 +42,7 @@
                 <p>Bootstrap v5.2.3</p>
             </div>
             <p><a href="{{ url_for('otazka') }}">Zadat anketní otázku</a></p>
+            <p><a href="{{ url_for('statistika') }}">Zobrazit statistiku</a></p>
 
             {% if otazky %}
                 <h2>Zadané otázky:</h2>
@@ -50,6 +51,9 @@
                         <li>
                             {{ ot }}
                             <a href="{{ url_for('odpoved', id=loop.index0) }}">Odpovědět</a>
+                            <span class="badge bg-secondary">
+                                Odpovědí: {{ odpovedi[loop.index0]|length }}
+                            </span>
                         </li>
                     {% endfor %}
                 </ul>

@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>Odpovědět na otázku</title>
+    <script>
+        function validateOdpoved() {
+            var o = document.getElementById('odpoved').value.trim();
+            if (o === "") {
+                alert("Zadejte prosím odpověď.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <h1>Odpovědět na otázku</h1>
     {% if otazka %}
         <p><strong>Otázka:</strong> {{ otazka }}</p>
-        <form method="POST">
+        <form method="POST" onsubmit="return validateOdpoved();">
             <label for="odpoved">Vaše odpověď:</label>
             <input type="text" id="odpoved" name="odpoved" required>
             <button type="submit">Odeslat odpověď</button>
