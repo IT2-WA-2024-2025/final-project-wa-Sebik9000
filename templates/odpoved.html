@@ -22,7 +22,7 @@
             <div class="card-body">
                 <h2 class="card-title">Odpovědět na otázku</h2>
                 {% if otazka %}
-                    <p><strong>Otázka:</strong> {{ otazka }}</p>
+                    <p><strong>Otázka:</strong> {{ otazka.text }}</p>
                     <form method="POST" onsubmit="return validateOdpoved();">
                         <div class="mb-3">
                             <label for="odpoved" class="form-label">Vaše odpověď:</label>
@@ -35,8 +35,8 @@
                     {% endif %}
                     <h4 class="mt-4">Všechny odpovědi:</h4>
                     <ul class="list-group">
-                        {% for o in vsechny_odpovedi %}
-                            <li class="list-group-item">{{ o }}</li>
+                        {% for o in otazka.odpovedi %}
+                            <li class="list-group-item">{{ o.text }}</li>
                         {% endfor %}
                     </ul>
                 {% else %}
