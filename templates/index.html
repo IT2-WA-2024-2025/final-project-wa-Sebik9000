@@ -3,42 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Ankety</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Navigace -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
+            <!-- Logo a odkaz na domovskou stránku -->
             <a class="navbar-brand" href="{{ url_for('home') }}">Ankety</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <!-- Odkaz na domů -->
                     <li class="nav-item"><a class="nav-link {% if request.endpoint == 'home' %}active{% endif %}" href="{{ url_for('home') }}">Domů</a></li>
+                    <!-- Odkaz na zadání otázky -->
                     <li class="nav-item"><a class="nav-link {% if request.endpoint == 'otazka' %}active{% endif %}" href="{{ url_for('otazka') }}">Zadat otázku</a></li>
+                    <!-- Odkaz na statistiku -->
                     <li class="nav-item"><a class="nav-link {% if request.endpoint == 'statistika' %}active{% endif %}" href="{{ url_for('statistika') }}">Statistika</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container mt-5">
+        <!-- Úvodní text -->
         <div class="text-center mb-4">
             <h1>Jednoduchá anketa</h1>
             <p class="lead">Vytvářejte otázky, odpovídejte a sledujte statistiky.</p>
         </div>
+        <!-- Tlačítka pro zadání otázky a zobrazení statistiky -->
         <div class="mb-3">
             <a href="{{ url_for('otazka') }}" class="btn btn-success me-2">Zadat anketní otázku</a>
             <a href="{{ url_for('statistika') }}" class="btn btn-info">Zobrazit statistiku</a>
         </div>
+        <!-- Výpis otázek z databáze -->
         {% if otazky %}
             <h2 class="mt-4">Zadané otázky:</h2>
             <ul class="list-group">
                 {% for ot in otazky %}
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         <span>
+                            <!-- Text otázky -->
                             {{ ot.text }}
+                            <!-- Odkaz na odpověď na otázku -->
                             <a href="{{ url_for('odpoved', id=ot.id) }}" class="btn btn-sm btn-primary ms-2">Odpovědět</a>
                         </span>
+                        <!-- Počet odpovědí na otázku -->
                         <span class="badge bg-secondary rounded-pill">
                             Odpovědí: {{ ot.odpovedi|length }}
                         </span>
@@ -46,9 +58,11 @@
                 {% endfor %}
             </ul>
         {% else %}
+            <!-- Zpráva pokud nejsou žádné otázky -->
             <div class="alert alert-warning mt-4">Žádné otázky zatím nebyly zadány.</div>
         {% endif %}
     </div>
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
